@@ -1,8 +1,12 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
@@ -58,6 +62,23 @@ public class NewLogin extends Application {
                 alert.setContentText("Welcome: " + username.getText());
                 alert.showAndWait();
 
+                primaryStage.setTitle("Role");
+                primaryStage.setWidth(300);
+                primaryStage.setHeight(100);
+                ObservableList<String> options = FXCollections.observableArrayList("Administrator", "Staff", "Faculty", "Student", "Guest");
+                final ComboBox comboBox = new ComboBox(options);
+                Label label = new Label("Please select your role");
+                FlowPane pane = new FlowPane();
+                comboBox.setOnAction(e->label.setText("Welcome: " + comboBox.getValue()));
+                pane.getChildren().add(label);
+                pane.getChildren().add(comboBox);
+                Scene scene = new Scene(pane);
+                primaryStage.setScene(scene);
+                primaryStage.show();
+
+
+
+
                 return;
 
             } else {
@@ -80,6 +101,10 @@ public class NewLogin extends Application {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Invalid Username");
             alert.showAndWait();
+
+
+
+
         }
     }
 
